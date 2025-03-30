@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Weather App</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <form id="weather-form">
+                <div class="input-container">
+                    <input type="text" id="city1" placeholder="Enter first city">
+                    <input type="text" id="city2" placeholder="Enter second city">
+                    <button type="submit">Compare</button>
+                    <button type="button" id="clear-button">Clear</button>
+                </div>
+            </form>
+            <div class="weather-cards-container">
+                <div class="weather-card" id="weather-card1">
+                    <img id="weather-icon1" src="" alt="Weather Icon">
+                    <h3 id="location1">City, Country</h3>
+                    <p id="localtime1">Local Time: --</p>
+                    <p id="temperature1">Temperature: --°C</p>
+                    <p id="weather-description1">Weather: --</p>
+                </div>
+                <div class="weather-card" id="weather-card2">
+                    <img id="weather-icon2" src="" alt="Weather Icon">
+                    <h3 id="location2">City, Country</h3>
+                    <p id="localtime2">Local Time: --</p>
+                    <p id="temperature2">Temperature: --°C</p>
+                    <p id="weather-description2">Weather: --</p>
+                </div>
+            </div>
+            <div class="difference-container" id="difference-container">
+                <p id="time-difference">Time Difference: --</p>
+                <p id="temperature-difference">Temperature Difference: --°C</p>
+            </div>
+        </div>        
+        <script src="script.js"></script>
+    </body>
+</html>
