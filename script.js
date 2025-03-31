@@ -23,6 +23,8 @@ const formatLocalTime = (localTime) => {
     return date.toLocaleString();
 };
 
+const celsiusToFahrenheit = (celsius) => (celsius * 9/5) + 32;
+
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -47,9 +49,12 @@ form.addEventListener('submit', async (event) => {
             alert(`Error: ${result1.error.info}`);
             weatherCard1.style.display = 'none';
         } else {
+            const tempC1 = result1.current.temperature;
+            const tempF1 = celsiusToFahrenheit(tempC1).toFixed(2);
+            
             location1Label.textContent = `${result1.location.name}, ${result1.location.country}`;
             localTime1.textContent = `Local Time: ${formatLocalTime(result1.location.localtime)}`;
-            temperatureText1.textContent = `Temperature: ${result1.current.temperature}°C`;
+            temperatureText1.innerHTML = `Temperature: ${tempC1}°C / ${tempF1}°F`;
             weatherIcon1.src = result1.current.weather_icons[0];
             weatherDescription1.textContent = `Weather: ${result1.current.weather_descriptions[0]}`;
             weatherCard1.style.display = 'block';
@@ -59,9 +64,12 @@ form.addEventListener('submit', async (event) => {
             alert(`Error: ${result2.error.info}`);
             weatherCard2.style.display = 'none';
         } else {
+            const tempC2 = result2.current.temperature;
+            const tempF2 = celsiusToFahrenheit(tempC2).toFixed(2);
+            
             location2Label.textContent = `${result2.location.name}, ${result2.location.country}`;
             localTime2.textContent = `Local Time: ${formatLocalTime(result2.location.localtime)}`;
-            temperatureText2.textContent = `Temperature: ${result2.current.temperature}°C`;
+            temperatureText2.innerHTML = `Temperature: ${tempC2}°C / ${tempF2}°F`;
             weatherIcon2.src = result2.current.weather_icons[0];
             weatherDescription2.textContent = `Weather: ${result2.current.weather_descriptions[0]}`;
             weatherCard2.style.display = 'block';
@@ -79,11 +87,9 @@ form.addEventListener('submit', async (event) => {
         }
 
         if (result1.current.temperature && result2.current.temperature) {
-            const temp1 = result1.current.temperature;
-            const temp2 = result2.current.temperature;
-
-            const tempDifference = Math.abs(temp1 - temp2);
-            temperatureDifferenceElement.textContent = `Temperature Difference: ${tempDifference}°C`;
+            const tempDifferenceC = Math.abs(result1.current.temperature - result2.current.temperature);
+            const tempDifferenceF = Math.abs(celsiusToFahrenheit(result1.current.temperature) - celsiusToFahrenheit(result2.current.temperature)).toFixed(2);
+            temperatureDifferenceElement.textContent = `Temperature Difference: ${tempDifferenceC}°C / ${tempDifferenceF}°F`;
         }
 
     } catch (error) {
@@ -101,5 +107,5 @@ clearButton.addEventListener('click', () => {
     weatherCard1.style.display = 'none';
     weatherCard2.style.display = 'none';
     timeDifferenceElement.textContent = 'Time Difference: --';
-    temperatureDifferenceElement.textContent = 'Temperature Difference: --°C';
+    temperatureDifferenceElement.textContent = 'Temperature Difference: --°C / --°F';
 });
